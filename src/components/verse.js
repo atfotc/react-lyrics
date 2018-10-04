@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import defaults from "../defaults";
+import React from "react"
+import styled from "styled-components"
+import defaults from "../defaults"
 
 const StyledVerse = styled.div`
   position: relative;
@@ -32,8 +32,8 @@ const StyledVerse = styled.div`
   :first-child {
     margin-top: 0;
   }
-`;
+`
 
-const Verse = ({ children, ...rest }) => <StyledVerse {...rest}>{children}</StyledVerse>;
+const Verse = ({ children, ...rest }) => <StyledVerse {...rest}>{children}</StyledVerse>
 
-export { Verse };
+export { Verse }

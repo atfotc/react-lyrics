@@ -1,3 +1,3 @@
-import { PrayUntilSomethingHappens } from "./pray-until-something-happens";
+import { PrayUntilSomethingHappens } from "./pray-until-something-happens"
 
-export { PrayUntilSomethingHappens };
+export { PrayUntilSomethingHappens }
