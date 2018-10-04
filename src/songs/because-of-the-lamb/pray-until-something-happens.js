@@ -36,7 +36,6 @@ const DelayedVerse3 = props => (
 const PrayUntilSomethingHappens = ({ animated, current }) => {
     return (
         <Fragment>
-            {current}
             <DelayedVerse1
                 animated={animated}
                 current={current}
