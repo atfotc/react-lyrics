@@ -42,7 +42,7 @@ const PrayUntilSomethingHappens = () => (
     </Repeat>
     <Verse1 repeat />
     <Verse>
-      <Line>Pray until something happens</Line>
+      <Line>Pray until something happens...</Line>
     </Verse>
   </Fragment>
 );
