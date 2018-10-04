@@ -33,73 +33,63 @@ const DelayedVerse3 = props => (
     </DelayedVerse>
 )
 
-const PrayUntilSomethingHappens = ({ animated, current }) => {
+const PrayUntilSomethingHappens = props => {
     return (
         <Fragment>
             <DelayedVerse1
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("00:06")}
                 before={seconds("00:28")}
                 repeat
             />
             <DelayedVerse2
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("00:28")}
                 before={seconds("00:41")}
             />
             <DelayedVerse1
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("00:41")}
                 before={seconds("01:02")}
                 repeat
             />
             <DelayedVerse3
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("01:02")}
                 before={seconds("01:25")}
                 repeat
             />
             <DelayedVerse1
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("01:25")}
                 before={seconds("01:47")}
                 repeat
             />
             <DelayedVerse2
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("01:47")}
                 before={seconds("02:00")}
             />
             <DelayedVerse1
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("02:00")}
                 before={seconds("02:22")}
                 repeat
             />
             <DelayedVerse3
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("02:22")}
                 before={seconds("02:45")}
                 repeat
             />
             <DelayedVerse1
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("02:45")}
                 before={seconds("03:06")}
                 repeat
             />
             <DelayedVerse
-                animated={animated}
-                current={current}
+                {...props}
                 after={seconds("03:06")}
                 before={seconds("03:12")}
             >
