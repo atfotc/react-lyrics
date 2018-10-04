@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import defaults from "../defaults"
+import { Delayed } from "./delayed"
 
 const StyledVerse = styled.div`
   position: relative;
@@ -36,4 +37,6 @@ const StyledVerse = styled.div`
 
 const Verse = ({ children, ...rest }) => <StyledVerse {...rest}>{children}</StyledVerse>
 
-export { Verse }
+const DelayedVerse = Delayed(Verse)
+
+export { DelayedVerse, Verse }

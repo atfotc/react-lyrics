@@ -1,7 +1,8 @@
-import { configure } from '@storybook/react';
+import { configure } from "@storybook/react"
 
-function loadStories() {
-  require('../src/stories');
+const load = () => {
+    require("../src/stories/components")
+    require("../src/stories/songs")
 }
 
-configure(loadStories, module);
+configure(load, module)
