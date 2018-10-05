@@ -7,4 +7,9 @@ const seconds = timestamp => {
     return minutes + seconds
 }
 
-export { seconds }
+const value = (key, theme, defaults) => theme[key] || defaults[key]
+const themed = (key, defaults) => ({ theme }) => value(key, theme, defaults)
+const repeatThemed = (key, defaults) => ({ theme, repeat }) =>
+    repeat && value(key, theme, defaults)
+
+export { seconds, value, themed, repeatThemed }
