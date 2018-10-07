@@ -7,14 +7,14 @@ const lineHeight = "1.5"
 const lineAlignItems = "center"
 
 const repeatFontSize = "14px"
-const repeatFontColor = "#333"
+const repeatFontColor = "#999"
 const repeatPrefix = "(repeat) "
 const repeatMargin = "0.35em"
 const repeatVerticalAlign = "1.5"
 const repeatFontWeight = "bold"
 const repeatText = "x2"
 
-const verseMarginTop = "1.5em"
+const verseMarginTop = "1em"
 
 const hebrewFontColor = fontColor
 const hebrewFontFamily = fontFamily
@@ -25,6 +25,7 @@ const defaults = {
     fontFamily,
     fontSize,
     fontColor,
+    fontWeight,
     lineHeight,
     lineAlignItems,
     repeatFontSize,
