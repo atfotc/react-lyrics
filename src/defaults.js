@@ -1,33 +1,44 @@
-const fontFamily = "Times, Times New Roman, serif"
+const fontFamily = "Noto Sans"
 const fontSize = "20px"
 const fontColor = "#000000"
+const fontWeight = "normal"
 
 const lineHeight = "1.5"
+const lineAlignItems = "center"
 
-const repeatBorder = "solid 5px #e5e5e5"
-const repeatPaddingX = "5px"
-const repeatPaddingY = "5px"
+const repeatFontSize = "14px"
+const repeatFontColor = "#333"
+const repeatPrefix = "(repeat) "
+const repeatMargin = "0.35em"
+const repeatVerticalAlign = "1.5"
+const repeatFontWeight = "bold"
 const repeatText = "x2"
-const repeatFontSize = "18px"
-const repeatFontColor = "#999999"
 
-const marginTop = "1.5em"
+const verseMarginTop = "1.5em"
 
-const canvasPadding = "10%"
+const hebrewFontColor = fontColor
+const hebrewFontFamily = fontFamily
+const hebrewFontWeight = "bold"
+const hebrewMargin = "0.35em"
 
-const exports = {
+const defaults = {
     fontFamily,
     fontSize,
     fontColor,
     lineHeight,
-    repeatBorder,
-    repeatPaddingX,
-    repeatPaddingY,
-    repeatText,
+    lineAlignItems,
     repeatFontSize,
     repeatFontColor,
-    marginTop,
-    canvasPadding,
+    repeatPrefix,
+    repeatMargin,
+    repeatVerticalAlign,
+    repeatFontWeight,
+    repeatText,
+    verseMarginTop,
+    hebrewFontColor,
+    hebrewFontFamily,
+    hebrewFontWeight,
+    hebrewMargin,
 }
 
-export default exports
+export default defaults

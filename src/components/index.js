@@ -1,7 +1,7 @@
-import { Canvas } from "./canvas"
-import { Delayed } from "./delayed"
-import { Line } from "./line"
-import { Verse, DelayedVerse } from "./verse"
+import { Line, StyledLine } from "./line"
+import { Repeat } from "./repeat"
+import { Song } from "./song"
+import { Verse, StyledVerse } from "./verse"
 import { Yahweh } from "./yahweh"
 
-export { Canvas, Delayed, DelayedVerse, Line, Verse, Yahweh }
+export { Line, StyledLine, Repeat, Song, Verse, StyledVerse, Yahweh }
