@@ -29,7 +29,7 @@ const Verse = ({ children, repeat, repeatText, ...rest }) => {
     return (
         <StyledVerse {...rest}>
             {Children.map(children, child => {
-                if (i === count - 1) {
+                if (repeat && i === count - 1) {
                     return cloneElement(child, {
                         repeat,
                         repeatText,
