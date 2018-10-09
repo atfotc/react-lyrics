@@ -7,5 +7,9 @@ import { PrayUntilSomethingHappens } from "../songs/because-of-the-lamb"
 storiesOf("Because Of The Lamb", module)
     .addDecorator(withKnobs)
     .add("Pray Until Something Happens", () => (
-        <PrayUntilSomethingHappens printing={boolean("Printing", false)} />
+        <PrayUntilSomethingHappens
+            isPrinting={boolean("isPrinting", false)}
+            isAnimating={boolean("isAnimating", false)}
+            isPlaying={boolean("isPlaying", false)}
+        />
     ))

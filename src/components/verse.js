@@ -21,24 +21,26 @@ const StyledVerse = styled.div`
     }
 `
 
-const Verse = ({ children, repeat, repeatText, ...rest }) => {
+const Verse = ({ children, repeat, repeatText, theme, ...rest }) => {
     const count = Children.count(children)
 
     let i = 0
 
     return (
-        <StyledVerse {...rest}>
+        <StyledVerse theme={theme} {...rest}>
             {Children.map(children, child => {
+                const props = {
+                    theme,
+                }
+
                 if (repeat && i === count - 1) {
-                    return cloneElement(child, {
-                        repeat,
-                        repeatText,
-                    })
+                    props.repeat = repeat
+                    props.repeatText = repeatText
                 }
 
                 i++
 
-                return child
+                return cloneElement(child, props)
             })}
         </StyledVerse>
     )
@@ -47,11 +49,13 @@ const Verse = ({ children, repeat, repeatText, ...rest }) => {
 Verse.propTypes = {
     repeat: PropTypes.bool,
     repeatText: PropTypes.string,
+    theme: PropTypes.object,
 }
 
 Verse.defaultProps = {
     repeat: false,
     repeatText: defaults.repeatText,
+    theme: {},
 }
 
 export { Verse, StyledVerse }

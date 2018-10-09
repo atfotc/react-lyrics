@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Children, cloneElement } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import defaults from "../defaults"
@@ -23,18 +23,30 @@ const StyledLine = styled.div`
     }
 `
 
-const Line = ({ children, ...rest }) => (
-    <StyledLine {...rest}>{children}</StyledLine>
+const Line = ({ theme, children, ...rest }) => (
+    <StyledLine theme={theme} {...rest}>
+        {Children.map(children, child => {
+            if (typeof child === "string") {
+                return child
+            }
+
+            return cloneElement(child, {
+                theme,
+            })
+        })}
+    </StyledLine>
 )
 
 Line.propTypes = {
     repeat: PropTypes.bool,
     repeatText: PropTypes.string,
+    theme: PropTypes.object,
 }
 
 Line.defaultProps = {
     repeat: false,
     repeatText: defaults.repeatText,
+    theme: {},
 }
 
 export { Line, StyledLine }

@@ -16,13 +16,13 @@ const StyledRepeatPrefix = styled.div`
     vertical-align: ${themed("repeatVerticalAlign", defaults)};
 `
 
-const Repeat = ({ children, printing }) => {
-    if (printing) {
+const Repeat = ({ children, isPrinting, theme }) => {
+    if (isPrinting) {
         return (
-            <StyledVerse>
-                <StyledLine>
+            <StyledVerse theme={theme}>
+                <StyledLine theme={theme}>
                     {defaults.repeatPrefix && (
-                        <StyledRepeatPrefix>
+                        <StyledRepeatPrefix theme={theme}>
                             {defaults.repeatPrefix}
                         </StyledRepeatPrefix>
                     )}
@@ -36,11 +36,13 @@ const Repeat = ({ children, printing }) => {
 }
 
 Repeat.propTypes = {
-    printing: PropTypes.bool,
+    isPrinting: PropTypes.bool,
+    theme: PropTypes.object,
 }
 
 Repeat.defaultProps = {
-    printing: false,
+    isPrinting: false,
+    theme: {},
 }
 
 export { Repeat }

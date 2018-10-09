@@ -1,18 +1,59 @@
 import { Children, Component, cloneElement } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import PropTypes from "prop-types"
+import { seconds } from "../helpers"
 
 class Song extends Component {
     static propTypes = {
-        animating: PropTypes.bool,
-        playing: PropTypes.bool,
-        printing: PropTypes.bool,
+        isAnimating: PropTypes.bool,
+        isPlaying: PropTypes.bool,
+        isPrinting: PropTypes.bool,
+        theme: PropTypes.object,
     }
 
     static defaultProps = {
-        animating: false,
-        playing: false,
-        printing: false,
+        isAnimating: false,
+        isPlaying: false,
+        isPrinting: false,
+        theme: {},
+    }
+
+    state = {
+        isPlaying: false,
+        ticks: 0,
+    }
+
+    static getDerivedStateFromProps({ isPlaying }, previousState) {
+        return {
+            isPlaying,
+            ticks: isPlaying ? 0 : undefined,
+        }
+    }
+
+    componentDidUpdate(previousProps, { isPlaying }) {
+        if (isPlaying) {
+            if (!this.startedAt) {
+                this.startedAt = new Date()
+            }
+        } else {
+            this.startedAt = undefined
+        }
+    }
+
+    componentDidMount() {
+        this.timer = setInterval(() => {
+            const { isPlaying } = this.state
+
+            if (isPlaying) {
+                this.setState(state => ({
+                    ticks: state.ticks + 1,
+                }))
+            }
+        }, 250)
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer)
     }
 
     markupFrom = target => {
@@ -75,7 +116,7 @@ class Song extends Component {
     }
 
     renderStaticChildren = () => {
-        const { children, printing } = this.props
+        const { children, isPrinting, theme } = this.props
 
         const verses = []
         const processed = []
@@ -83,23 +124,28 @@ class Song extends Component {
         let i = 0
 
         Children.forEach(children, child => {
+            const props = {
+                key: `child_${i}`,
+                theme,
+            }
+
             if (child.type.name === "Verse") {
                 const verse = this.verseFrom(child)
-                processed.push(cloneElement(verse.verse, { key: `child_${i}` }))
+                processed.push(cloneElement(verse.verse, props))
                 verses.push(verse)
             }
 
             if (child.type.name === "Repeat") {
-                if (printing) {
+                if (isPrinting) {
                     processed.push(
                         cloneElement(child, {
-                            printing: true,
-                            key: `child_${i}`,
+                            ...props,
+                            isPrinting: true,
                         }),
                     )
                 } else {
                     const verse = this.verseFromRepeatOf(child, verses)
-                    processed.push(cloneElement(verse, { key: `child_${i}` }))
+                    processed.push(cloneElement(verse, props))
                 }
             }
 
@@ -109,14 +155,43 @@ class Song extends Component {
         return processed
     }
 
-    render() {
-        const { animating } = this.props
+    renderAnimatedChildren = () => {
+        const { cues } = this.props
 
-        if (!animating) {
-            return this.renderStaticChildren()
+        const processed = this.renderStaticChildren()
+        const limits = []
+
+        for (let i = 0; i < cues.length; i++) {
+            if (i < cues.length - 1) {
+                limits.push([seconds(cues[i]), seconds(cues[i + 1])])
+            } else {
+                limits.push([seconds(cues[i]), 9999]) // make this dynamic for the track...
+            }
         }
 
-        return this.renderChildren()
+        const now = new Date()
+        const then = this.startedAt || new Date()
+        const diff = (now.getTime() - then.getTime()) / 1000
+
+        const shown = []
+
+        for (let i = 0; i < processed.length; i++) {
+            if (diff >= limits[i][0] && diff < limits[i][1]) {
+                shown.push(cloneElement(processed[i]))
+            }
+        }
+
+        return shown
+    }
+
+    render() {
+        const { isAnimating } = this.props
+
+        if (isAnimating) {
+            return this.renderAnimatedChildren()
+        }
+
+        return this.renderStaticChildren()
     }
 }
 
